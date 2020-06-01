@@ -1,6 +1,6 @@
 {
-  "name": "kotchi-cli",
-  "version": "0.1.0",
+  "name": "@kotchi-ui/cli",
+  "version": "0.1.1",
   "description": "Command line interface for KotchiUI framwork",
   "main": "lib/kui.js",
   "files": [
