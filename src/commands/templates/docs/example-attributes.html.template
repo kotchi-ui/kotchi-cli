@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<template id="additional_info">
+	<p>
+		Here is a list of the available attributes for the <code>&lt;{{toTagName name}}&gt;</code> that can be used
+	</p>
+	<table class="table table-bordered">
+		<thead>
+			<tr class="text-uppercase">
+				<th>Attribute</th>
+				<th>Type</th>
+				<th>Default value</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each attributes}}
+			<tr>
+				<td><a href="#examples-{{name}}">{{name}}</a></td>
+				<td>{{type}}</td>
+				<td>{{defaultValue}}</td>
+				<td>{{{description}}}</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</template>

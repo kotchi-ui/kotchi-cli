@@ -1,0 +1,29 @@
+{
+  "id": "{{toTagName name}}",
+  "category": "components",
+	"title": "{{componentName name}}",
+	"tagName": "{{toTagName name}}",
+	"subtitle": "{{{description}}}",
+	"cards": [
+    {
+			"id": "example-attributes",
+			"title": "Attributes Configurations",
+			"subtitle": "Configure <code>&lt;{{toTagName name}}&gt;</code> through the following attributes",
+			"contents": "example-attributes.html"
+		},
+		{
+			"id": "examples-basic",
+			"title": "Basic Examples",
+			"subtitle": "Basic examples on how to use <code>&lt;{{toTagName name}}&gt;</code> with different variations",
+			"contents": "examples-basic.html"
+		}
+		{{#each attributes}}
+		,{
+			"id": "examples-{{name}}",
+			"title": "{{componentName name}}",
+			"subtitle": "TODO:: Add few words descriping this attribute",
+			"contents": "examples-{{name}}.html"
+		}
+		{{/each}}
+	]
+}

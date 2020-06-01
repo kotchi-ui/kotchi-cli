@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<template id="additional_info">
+	<p>
+		<!-- Add more details and explanation about {{name}} and how it effects the component -->
+	</p>
+</template>
+<template id="preview">
+	<!-- Add few examples for {{name}} usage in the component -->
+</template>

@@ -1,0 +1,11 @@
+import { withKnobs /*, text, boolean, select */ } from "@storybook/addon-knobs";
+import "./";
+
+export default { title: "{{componentName name}} <{{toTagName name}}>", decorators: [withKnobs] };
+
+export const basicUsage = () => {
+  const groupId = "{{toTagName name}}";
+  return `
+    <{{toTagName name}}></{{toTagName name}}>
+    <h5>Use Knobs to see different states of the component</h5>`;
+};

@@ -1,0 +1,44 @@
+# {{toTagName name}}
+{{{description}}}
+
+For more information and examples, visit the [demo](https://kotchi-ui.github.io/kotchi-ui-kit/{{name}}.html) page.
+
+## Attributes
+name                    | type              | default value             | description
+----------------------- | ----------------- | ------------------------- | ----------------------------------------
+{{#each attributes}}
+`{{toAttribute name}}`| {{type}}          | {{defaultValue}}          | {{{description}}}
+{{/each}}
+
+{{#if publicAPI}}
+## Public API
+name                  | parameters             | return value       | description
+--------------------- | ---------------------- | ------------------ | --------------------------------------------
+{{#each publicAPI}}
+`{{name}}`            | {{paramsList params}} | `{{returns.type}}` | {{{description}}}
+{{/each}}
+{{/if}}
+
+## Usage
+in HTML
+```html
+<head>
+    <!-- ... -->
+    <!-- Polyfill for older browsers and those who don't support web components -->
+	<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.4.0/webcomponents-loader.js"></script>
+	<script src="https://unpkg.com/@kotchi-ui/ui-kit/{{toTagName name}}.js"></script>
+</head>
+<body>
+<!-- ... -->
+<!-- TODO:: Create a code example -->
+<!-- ... -->
+</body>
+```
+
+in Javascript
+```js
+import "@kotchi-ui/ui-kit/{{toTagName name}}";
+
+//...
+// TODO:: Create a code example
+```

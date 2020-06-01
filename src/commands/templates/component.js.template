@@ -1,0 +1,139 @@
+// TODO:: import all 3rd party packages here at the top
+import {
+  kuiCustomElement,
+  kuiAttribute,
+  kuiAttributeValidator,
+  kuiChangeHandler,
+  Types,
+  typeValidator,
+  CustomElementUtils,
+} from "@kotchi-ui/core";
+import templateGenerator from "./template";
+
+const tagName = "{{toTagName name}}";
+{{#hasBooleanAttribute attributes}}
+const { booleanSetter, booleanGetter } = CustomElementUtils;
+{{/hasBooleanAttribute}}
+const { useShadowDom } = CustomElementUtils;
+
+{{#if allowedChildren}}
+const allowedChildren = [{{{joinArray allowedChildren}}}];
+{{/if}}
+{{#if allowedParents}}
+const allowedParents = [{{{joinArray allowedParents}}}];
+{{/if}}
+
+{{#each userDefinedTypes}}
+const {{name}} = {
+{{#each values}}
+    {{key}}: {{{toUserDefinedValue value}}},
+{{/each}}
+};
+{{/each}}
+
+/**
+ * {{{description}}}
+ * @element {{toTagName name}}
+ */
+@kuiCustomElement({ tagName{{#if allowedChildren}}, allowedChildren{{/if}}{{#if allowedParents}}, allowedParents{{/if}} })
+class {{toClass name}} extends HTMLElement {
+  {{#each attributes}}
+  {{#isUserDefinedType type}}
+  @kuiAttributeValidator([typeValidator({{type}})])
+  {{else}}
+  @kuiAttributeValidator([typeValidator(Types.{{type}})])
+  {{/isUserDefinedType}}
+  {{#isBoolean type}}
+  @kuiAttribute({ setter: booleanSetter, getter: booleanGetter })
+  {{else}}
+  @kuiAttribute
+  {{/isBoolean}}
+  {{toProperty name}}{{#if defaultValue}} = {{defaultValue}}{{/if}};
+
+  {{/each}}
+
+  constructor() {
+    // Always call super first in constructor
+    super();
+    const { template, selectors } = templateGenerator.call(this, tagName);
+    useShadowDom({ host: this, template });
+    this.initElements(selectors);
+    this.bindHandlers();
+  }
+
+  /**
+  * initialize the elements object by mapping the different DOM parts from the template
+  * @param {Object} selectors - a map with the query selectors for the different parts of the DOM
+  */
+  initElements(selectors) {
+    this.elements = {
+      // Example:
+      // heaeder: this.shadowRoot.querySelector(selectors.header)
+    };
+  }
+
+  /**
+  * Binds the event handlers with this object to keep the reference always to this custom element
+  */
+  bindHandlers() {
+    // Example: 
+    // this.headerClickHandler = this.headerClickHandler.bind(this);
+  }
+
+  /**
+  * Invoked each time the custom element is appended into a document-connected element. This will happen each time the node is moved, and may happen before the element's contents have been fully parsed
+{{#if allowedChildren}}
+  * @param {Array} children - a list of other KotchiUI connected children of this custom element
+{{/if}}
+  */
+  connectedCallback({{#if allowedChildren}}children{{/if}}) {
+      // TODO Auto-generated method
+      // Note: connectedCallback may be called once your element is no longer connected, use this.isConnected to make sure.
+  }
+
+  /**
+  * Invoked each time the custom element is disconnected from the document's DOM.
+  * recommended place to release all the custom element resources.
+  */
+  disconnectedCallback() {
+    // TODO Auto-generated method
+    // Example:
+    // this.elements.header.removeEventListener("click", this.headerClickHandler);
+  }
+
+  /**
+  * Invoked each time the custom element is moved to a new document.
+  */
+  adoptedCallback() {
+    // TODO Auto-generated method
+  }
+
+{{#each attributes}}
+  @kuiChangeHandler
+  {{toProperty name}}ChangeHandler({ newValue, oldValue, defaultValue }) {
+    // TODO Auto-generated method
+  }
+  
+{{/each}}
+
+{{#each publicAPI}}
+  /**
+  * {{{description}}}
+  {{#each params}}
+  * @param { {{type}} } {{name}} - {{{description}}}
+  {{/each}}
+  {{#if returns}}
+  * @returns {{#if returns.type}}{ {{returns.type}} }{{/if}} {{{returns.description}}}
+  {{/if}}
+  */
+  {{name}}({{paramsList params}}) {
+    // TODO Auto-generated method
+  }
+
+{{/each}}
+  getTagName() {
+    return tagName;
+  }
+}
+
+export default {{toClass name}};

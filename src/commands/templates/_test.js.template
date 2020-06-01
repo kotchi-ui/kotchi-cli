@@ -1,0 +1,26 @@
+import { Window } from "happy-dom";
+import "../";
+
+const window = new Window();
+const document = window.document;
+let {{toProperty name}};
+
+beforeEach(() => {
+  document.body.innerHTML = "<{{toTagName name}} id='my-{{toTagName name}}'></{{toTagName name}}>";
+  {{toProperty name}} = document.querySelector("#my-{{toTagName name}}");
+});
+describe("Make sure component is created", () => {
+  test("’Make sure <{{toTagName name}}> is defined as a custom element with shadowRoot", () => {
+    expect({{toProperty name}}).not.toBeNull();
+    expect({{toProperty name}}.shadowRoot).not.toBeNull();
+  });
+  test("’Make sure <{{toTagName name}}> has elements object defined", () => {
+    expect({{toProperty name}}.elements).not.toBeNull();
+    // TODO:: Add check for the rest of the elements
+  });
+  test("Make sure component attributes are also reflected on object properties", () => {
+    {{#each attributes}}
+    expect("{{toProperty name}}" in {{toProperty ../name}}).toBe(true);
+    {{/each}}
+  });
+});
