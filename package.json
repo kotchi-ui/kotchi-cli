@@ -1,6 +1,6 @@
 {
   "name": "@kotchi-ui/cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Command line interface for KotchiUI framwork",
   "main": "lib/kui.js",
   "files": [
@@ -41,6 +41,7 @@
     "prettier": "2.0.5"
   },
   "dependencies": {
+    "core-js": "^3.6.5",
     "fs-extra": "^8.1.0",
     "handlebars": "^4.7.6",
     "lodash": "^4.17.15",
